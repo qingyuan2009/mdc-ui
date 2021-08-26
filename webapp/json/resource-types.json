@@ -1,0 +1,12 @@
+{
+	"resourceTypes": [
+		{
+			"resourceType": "ExceptionAccount",
+			"profile": "http://sap.com/fhir/StructureDefinition/ExtendedExceptionAccount"
+		},
+		{
+			"resourceType": "ChargeItemView",
+			"profile": "http://sap.com/fhir/StructureDefinition/ChargeItemView"
+		}
+	]
+}

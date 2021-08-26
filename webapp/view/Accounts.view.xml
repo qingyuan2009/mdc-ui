@@ -1,0 +1,241 @@
+<mvc:View displayBlock="true" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mdc="sap.ui.mdc"
+	xmlns:mdcc="sap.ui.mdc.chart" xmlns:mdcf="sap.ui.mdc.field"
+	xmlns:mdcl="sap.ui.mdc.link" xmlns:ui="sap.ui"
+	xmlns:variants="sap.ui.fl.variants" xmlns="sap.m"
+	xmlns:types="sap.ui.jsondemo.types"
+	xmlns:demo="sap.ui.jsondemo.controls"
+	controllerName="sap.ui.fhir.controller.Accounts">
+	<Page showHeader="false" enableScrolling="false"
+		class="sapUiContentPadding" showNavButton="false">
+		<VBox height="95%">
+			<variants:VariantManagement
+				id="IDVariantManagementOfTable"
+				for="accountsTable,accountsFilterBar" class="sapUiTinyMarginBottom" />
+			<mdc:FilterBar id="accountsFilterBar"
+				filterConditions='\{"stock" : [\{"operator":"BT","values":[0,99999]}]\}'
+				liveMode="false"
+				delegate="{name: 'sap/ui/fhir/delegate/ExceptionAccountFilterBarDelegate', payload: {collectionName: 'ExceptionAccount'}}"
+				p13nMode="Item,Value">
+				<mdc:dependents>
+					<mdcf:ConditionFieldHelp id="fhAdod" title="Define Filter Conditions" label="Define Date" 
+						delegate="{name: 'sap/ui/mdc/field/FieldValueHelpDelegate', payload: {}}" />
+<!-- 
+sap.ui.mdc.field.FieldValueHelpMTableWrapper._getDataFromContext
+Line 940: oDataModelRow.hasOwnProperty(sDescriptionPath) assumes that the row is a flat structure
+which is not the case for the patient name: name/0/text
+ -->						
+						
+					<mdcf:FieldValueHelp filterFields="*name*"
+						title="Patient Name" id="FHPatientName" noDialog="false"
+						keyPath="name" descriptionPath="name"
+						showConditionPanel="true">
+						<mdcf:filterBar>
+							<mdc:FilterBar liveMode="false">
+								<mdc:filterItems>
+									<mdc:FilterField
+										delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+										label="Name" conditions="{$filters>/conditions/name}" />
+								</mdc:filterItems>
+							</mdc:FilterBar>
+						</mdcf:filterBar>
+						<mdcf:content>
+							<mdcf:FieldValueHelpMTableWrapper>
+								<mdcf:table>
+									<Table items='{path : "/PatientNameView"}' width="30rem"
+										growing="true" growingScrollToLoad="true"
+										growingThreshold="20">
+										<columns>
+											<Column width="5rem">
+												<header>
+													<Text text="Patient Id" />
+												</header>
+											</Column>
+											<Column width="5rem">
+												<header>
+													<Text text="Patient Name" />
+												</header>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{id}" />
+													<Text text="{name}" />
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</mdcf:table>
+							</mdcf:FieldValueHelpMTableWrapper>
+						</mdcf:content>
+					</mdcf:FieldValueHelp>
+					<!-- <mdcf:FieldValueHelp filterFields="*name*" title="Account Scenario" 
+						id="FHAccountScenario" noDialog="true" keyPath="code" descriptionPath="code" 
+						showConditionPanel="true"> <mdcf:content> <mdcf:FieldValueHelpMTableWrapper> 
+						<mdcf:table> <Table items='{path : "/ValueSet/account-scenario", parameters: 
+						{request: {url: "http://sap.com/fhir/ValueSet/account-scenario"}}}' width="30rem" 
+						growing="true" growingScrollToLoad="true" growingThreshold="20"> <columns> 
+						<Column width="5rem"> <header> <Text text="Code" /> </header> </Column> <Column 
+						width="5rem"> <header> <Text text="Description" /> </header> </Column> </columns> 
+						<items> <ColumnListItem type="Active"> <cells> <Text text="{code}" /> <Text 
+						text="{display}" /> </cells> </ColumnListItem> </items> </Table> </mdcf:table> 
+						</mdcf:FieldValueHelpMTableWrapper> </mdcf:content> </mdcf:FieldValueHelp> -->
+					<mdcf:FieldValueHelp filterFields="*name*"
+						title="Department" id="FHDepartmentName" noDialog="false"
+						keyPath="name" descriptionPath="name" showConditionPanel="true">
+						<mdcf:filterBar>
+							<mdc:FilterBar liveMode="false">
+								<mdc:filterItems>
+									<mdc:FilterField
+										delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+										label="Name" conditions="{$filters>/conditions/name}" />
+								</mdc:filterItems>
+							</mdc:FilterBar>
+						</mdcf:filterBar>
+						<mdcf:content>
+							<mdcf:FieldValueHelpMTableWrapper>
+								<mdcf:table>
+									<Table id="organizationTable"
+										items='{path : "/Organization"}' width="30rem" growing="true"
+										growingScrollToLoad="true" growingThreshold="20">
+										<columns>
+											<Column width="15rem">
+												<header>
+													<Text text="Id" />
+												</header>
+											</Column>
+											<Column width="15rem">
+												<header>
+													<Text text="Name" />
+												</header>
+											</Column>
+											<!-- <Column> <header> <Text text="Label" /> </header> </Column> -->
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{id}" />
+													<Text text="{name}" />
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</mdcf:table>
+							</mdcf:FieldValueHelpMTableWrapper>
+						</mdcf:content>
+					</mdcf:FieldValueHelp>
+				</mdc:dependents>
+				<mdc:basicSearchField>
+					<mdc:FilterField
+						delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+						id="field0" dataType="sap.ui.model.type.String" placeholder="Search Cases"
+						conditions="{$filters>/conditions/$search}" maxConditions="1" />
+				</mdc:basicSearchField>
+				
+				<mdc:filterItems>
+				<!-- 
+					<mdc:FilterField
+						delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+						id="ff0" label="Case Number"
+						conditions="{$filters>/conditions/identifier}"
+						dataType="sap.ui.model.type.String" required="false"></mdc:FilterField>
+				 -->		
+<!--  					<mdc:FilterField
+						delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
+						id="ff1" label="Patient Name"
+						conditions="{$filters>/conditions/patientName}"
+						dataType="sap.ui.model.type.String" required="false" operators="EQ,LE,LT,GE,GT,BT"
+						fieldHelp="FHPatientName"></mdc:FilterField>    -->
+					<!-- 
+					<mdc:FilterField delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', 
+						payload: {}}" id="ff2" label="Scenario" conditions="{$filters>/conditions/type}" 
+						dataType="sap.ui.model.type.String" required="false" fieldHelp="FHAccountScenario"></mdc:FilterField>
+					 -->	
+				<mdc:FilterField
+						delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
+						id="ff3" label="Department" dataType="sap.ui.model.type.String"
+						maxConditions="2" fieldHelp="FHDepartmentName" operators="EQ,LE,LT,GE,GT,BT"
+						conditions="{$filters>/conditions/organizationName}" />
+					<!-- 
+					<mdc:FilterField delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', 
+						payload: {}}" id="ff4" label="Exceptions" dataType="sap.ui.model.type.Integer" 
+						maxConditions="-1" required="false" conditions="{$filters>/conditions/numberOfTasks}"/> 
+						<mdc:FilterField delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: 
+						{}}" id="ff5" label="Case Number" dataType="sap.ui.model.type.String" required="false" 
+						conditions="{$filters>/conditions/identifier}"/>
+					 -->	
+				</mdc:filterItems>
+				 
+			</mdc:FilterBar>
+			<ScrollContainer vertical="true" width="100%"
+				height="100%" focusable="true">
+				<mdc:Table id="accountsTable" header="Open Cases"
+					filter="accountsFilterBar" p13nMode="{=['Sort','Column']}"
+					delegate="{name: 'sap/ui/fhir/delegate/ExceptionAccountTableDelegate', payload: {collectionName: 'ExceptionAccount'}}"
+					showRowCount="true" rowPress="onRowPress" threshold="4"
+					width="100%" rowAction="{=['Navigation']}">
+					<mdc:columns>
+						<mdc:table.Column id="accountIdColumn"
+							header="Billing Case Id" dataProperty="id" width="15rem">
+							<mdc:Field id="billingCaseIdField"
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{id}" editMode="Display" multipleLines="true">
+							</mdc:Field>
+						</mdc:table.Column>
+						<mdc:table.Column id="accountIdentifierColumn"
+							header="Case Number" dataProperty="identifier">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{identifier}" multipleLines="true" editMode="Display" />
+						</mdc:table.Column>
+						<mdc:table.Column id="accountTypeColumn"
+							header="Scenario" dataProperty="type" width="15rem">
+							<mdc:Field id="accountTypeField"
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{type}" editMode="Display" multipleLines="true">
+							</mdc:Field>
+						</mdc:table.Column>
+						<mdc:table.Column id="patientNameColumn"
+							header="Patient Name" dataProperty="patientName">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{patientName}" multipleLines="true" editMode="Display" />
+						</mdc:table.Column>
+						<mdc:table.Column id="departmentNameColumn"
+							header="Department" dataProperty="organizationName" width="10rem">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{organizationName}" editMode="Display" />
+						</mdc:table.Column>
+						<mdc:table.Column id="ExceptionsColumn"
+							header="Exceptions" dataProperty="numberOfTasks" width="10rem">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{numberOfTasks}" editMode="Display" />
+						</mdc:table.Column>
+						<!-- 
+						<mdc:table.Column id="StartColumn"
+							header="Start Date" dataProperty="start" width="10rem">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{path: 'start', type: 'sap.ui.fhir.type.FHIRDateTime'}" editMode="Display" />
+						</mdc:table.Column>
+						<mdc:table.Column id="DOBColumn"
+							header="Date of Birth" dataProperty="birthDate" width="10rem">
+							<mdc:Field
+								delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+								value="{path: 'birthDate', type: 'sap.ui.fhir.type.FHIRDate'}" editMode="Display" />
+						</mdc:table.Column>
+						 -->
+					</mdc:columns>
+					<mdc:type>
+						<mdc:table.ResponsiveTableType
+							growingMode="Scroll" />
+					</mdc:type>
+				</mdc:Table>
+			</ScrollContainer>
+		</VBox>
+	</Page>
+</mvc:View>

@@ -1,0 +1,101 @@
+{
+  "_from": "openui5-fhir",
+  "_id": "openui5-fhir@1.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-OBvwHgKhUKlqQ293FxLeBLCy5labnEblzSG7GwyfHPamFA7Q0rbS6A8mlMYXCz20kwfwVaAwujQkYR1jk294cQ==",
+  "_location": "/openui5-fhir",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "openui5-fhir",
+    "name": "openui5-fhir",
+    "escapedName": "openui5-fhir",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/openui5-fhir/-/openui5-fhir-1.0.4.tgz",
+  "_shasum": "73feb67cc5f9304cafdafb8e4052d8e26cd21bf7",
+  "_spec": "openui5-fhir",
+  "_where": "/Users/d061987/git/mdc-on-phir",
+  "author": {
+    "name": "SAP SE"
+  },
+  "bugs": {
+    "url": "https://github.com/SAP/openui5-fhir/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "OpenUI5-FHIR Development Team",
+      "url": "https://github.com/SAP/openui5-fhir/graphs/contributors"
+    }
+  ],
+  "deprecated": false,
+  "description": "The OpenUI5-FHIR Library enables UI5 to the FHIR world",
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
+    "@ui5/cli": "^1.5.5",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.0.1",
+    "eslint-watch": "^6.0.0",
+    "js-beautify": "^1.10.0",
+    "js-yaml": "^3.13.1",
+    "jsdoc": "^3.6.2",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^3.0.0",
+    "karma-coverage": "^2.0.1",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-ui5": "^1.0.1",
+    "replace-in-file": "^4.1.0"
+  },
+  "engines": {
+    "node": ">= 8.5",
+    "npm": ">= 5"
+  },
+  "files": [
+    "src/sap/fhir/**/*.js",
+    "ui5.yaml"
+  ],
+  "homepage": "https://github.com/SAP/openui5-fhir#readme",
+  "keywords": [
+    "openui5",
+    "sapui5",
+    "ui5",
+    "fhir"
+  ],
+  "license": "Apache-2.0",
+  "name": "openui5-fhir",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SAP/openui5-fhir.git"
+  },
+  "scripts": {
+    "deploy:coverage": "cat ./test-results/coverage/all/lcov/lcov-all.info | coveralls || echo \"Deployment of coverage to coveralls.io failed.\"",
+    "docs": "npm run docs:prod --packageVersion=$(npm view $npm_package_name version)",
+    "docs:dev": "npx jsdoc --configure ./lib/jsdoc/create-api-documentation.js --verbose --access all",
+    "docs:prod": "npx jsdoc --configure ./lib/jsdoc/create-api-documentation.js --verbose --access public",
+    "format:xml": "js-beautify --wrap-attributes force-aligned --replace --type html test/**/*.xml",
+    "lint": "eslint src test",
+    "lint:console": "eslint src test || true",
+    "lint:file:checkstyle": "eslint -o ./target/eslint/eslint.checkstyle.xml -f checkstyle src test",
+    "lint:watch": "esw . --watch",
+    "lint:watch:fix": "esw . --watch --fix",
+    "lint:watch:fix:debug": "esw . --watch --fix --debug",
+    "prepublishOnly": "node ./scripts/build/builder.js",
+    "serve": "npm run serve:mockserver && npm run serve:ui5",
+    "serve:mockserver": "./scripts/setup_mock.sh",
+    "serve:ui5": "ui5 serve",
+    "test": "karma start",
+    "test-mockserver": "npm run serve:mockserver && npm test",
+    "test:opa5": "karma start karma-opa5.conf.js",
+    "test:unit": "karma start karma-unit.conf.js"
+  },
+  "version": "1.0.4"
+}

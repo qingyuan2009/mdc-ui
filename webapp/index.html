@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+
+<title>Billing Exception PoC</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- src="https://sapui5nightly.int.sap.hana.ondemand.com/resources/sap-ui-core.js"  -->
+<!-- src="http://veui5infra.dhcp.wdf.sap.corp:8080/uilib-sample/resources/sap-ui-core.js" -->
+<!-- https://sapui5untested.int.sap.eu2.hana.ondemand.com/uilib-sample/resources/sap-ui-core.js -->
+<!--  src="https://sapui5untested.int.sap.eu2.hana.ondemand.com/uilib-sample/resources/sap-ui-core.js" -->
+<!-- data-sap-ui-resourceroots='{"sap.ui.fhir" : "./", "sap.fhir":"./openui5-fhir/src/sap/fhir/"}' -->
+<!-- src="resources/sap-ui-core.js" -->
+<!-- , "sap.fhir":"./openui5-fhir/src/sap/fhir/" -->
+    <script src="https://sapui5untested.int.sap.eu2.hana.ondemand.com/uilib-sample/resources/sap-ui-core.js" id="sap-ui-bootstrap"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+        data-sap-ui-theme="sap_fiori_3"
+        data-sap-ui-resourceroots='{"sap.ui.fhir" : "./", "sap.fhir":"./openui5-fhir/src/sap/fhir/"}'
+        data-sap-ui-async="true">
+    </script>
+<style>
+#container-jsondemo---app--app {
+	margin-bottom: -48px;
+}
+
+.pageBox>.sapMFlexItem {
+	height: 100%;
+}
+</style>
+
+</head>
+
+<body class="sapUiBody sapUiSizeCompact" id="content">
+	<div data-sap-ui-component data-name="sap.ui.fhir"
+		data-id="container" data-settings='{"id" : "fhir"}'></div>
+</body>
+
+</html>

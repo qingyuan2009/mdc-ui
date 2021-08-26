@@ -1,0 +1,17 @@
+{
+	"name": "mdc-on-fhir-rest",
+	"version": "1.0.0",
+	"description": "MDC Demo Application using FHIR REST",
+	"author": "SAP SE",
+	"license": "SAP SAMPLE CODE LICENSE AGREEMENT",
+	"dependencies": {
+		"openui5-fhir": "^2.0.5"
+	},
+	"devDependencies": {
+		"@ui5/cli": "^2.2.2"
+	},
+	"scripts": {
+		"serve": "ui5 serve",
+		"start": "ui5 serve -o index.html"
+	}
+}

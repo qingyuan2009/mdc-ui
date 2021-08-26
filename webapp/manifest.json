@@ -1,0 +1,133 @@
+{
+	"_version": "0.1.0",
+	"sap.ui.fhir" : {
+		"resourceTypes" : [
+			{
+				"resourceType": "ExceptionAccount",
+				"profile": "http://sap.com/fhir/StructureDefinition/ExceptionAccount"
+			}, 			{
+				"resourceType": "ChargeItemView",
+				"profile": "http://sap.com/fhir/StructureDefinition/ChargeItemView"
+			}
+		]
+	},
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "sap.ui.fhir",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"fhir": {
+				"uri": "http://localhost:8082/FHIRApi"
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.7.0",
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.ui.fhir.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "accounts",
+					"target": [
+						"accounts"
+					]
+				},
+				{
+					"pattern": "Accounts/{accountId}",
+					"name": "accountdetails",
+					"target": [
+						"accountdetails"
+					]
+				}
+			],
+			"targets": {
+				"accountdetails": {
+					"viewId": "accountdetails",
+					"viewName": "AccountDetails"
+				},
+				"accounts": {
+					"viewId": "accounts",
+					"viewName": "Accounts"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "sap.ui.fhir.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.70",
+			"libs": {
+				"sap.m": {
+					"lazy": true
+				},
+				"sap.ui.layout": {
+					"lazy": true
+				},
+				"sap.ui.fl": {
+					"lazy": false
+				},
+				"sap.ui.mdc": {
+					"lazy": true
+				}
+			}
+		},
+		"autoPrefixId": true,
+		"models": {
+			"": {
+				"type": "sap.fhir.model.r4.FHIRModel",
+				"dataSource": "fhir",
+				"settings": {
+					"groupProperties": {
+						"A": {
+							"submit": "Batch"
+						},
+						"B": {
+							"submit": "Batch"
+						},
+						"C": {
+							"submit": "Batch"
+						}
+					}
+				}
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.ui.fhir.i18n.i18n"
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	}
+}

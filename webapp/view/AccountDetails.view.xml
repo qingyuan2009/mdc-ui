@@ -1,0 +1,138 @@
+<mvc:View displayBlock="true" xmlns:uxap="sap.uxap"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:mdc="sap.ui.mdc" xmlns:mdcf="sap.ui.mdc.field"
+	xmlns:mdcl="sap.ui.mdc.link" xmlns:ui="sap.ui"
+	xmlns:variants="sap.ui.fl.variants" xmlns="sap.m"
+	xmlns:unified="sap.ui.unified"
+	controllerName="sap.ui.fhir.controller.AccountDetails">
+	<uxap:ObjectPageLayout id="ObjectPageLayout"
+		showTitleInHeaderContent="true" alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="true"
+		isChildPage="true" upperCaseAnchorBar="false">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:expandedHeading>
+					<Title text="Account: {id}" wrapping="true"
+						class="sapUiSmallMarginEnd" />
+				</uxap:expandedHeading>
+				<uxap:actions>
+					<ToggleButton text="back" type="Emphasized"
+						press="onBackButtonPress" />
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+
+		<uxap:headerContent>
+			<FlexBox wrap="Wrap" fitContainer="true">
+				<VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+					id="patientBox">
+					<Title text="Patient Details" class="sapUiTinyMarginBottom" />
+					<HBox class="sapUiTinyMarginBottom" renderType="Bare">
+						<Label text="Patient Name" class="sapUiTinyMarginEnd" />
+						<Text text="{name/[use=official]/text}" />
+					</HBox>
+
+					<HBox class="sapUiTinyMarginBottom" renderType="Bare">
+						<Label text="Patient ID" class="sapUiTinyMarginEnd" />
+						<Text text="{id}" />
+					</HBox>
+					<HBox>
+						<Label text="Patient Gender" class="sapUiTinyMarginEnd" />
+						<Text text="{gender}" />
+					</HBox>
+					<HBox>
+						<Label text="Patient DOB" class="sapUiTinyMarginEnd" />
+						<Text
+							text="{ path: 'birthDate', 
+								type: 'sap.ui.fhir.type.FHIRDate'}" />
+					</HBox>
+				</VBox>
+			</FlexBox>
+		</uxap:headerContent>
+<!-- formatOptions: {style: 'short',
+													source: {
+													pattern: 'yyyy-MM-dd'
+												}} -->
+		<uxap:sections>
+			<uxap:ObjectPageSection title="Overview">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection title="Billing Items">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+							<mdc:Table id="chargeItemViewTable"
+								header="Billing Items"
+								delegate="{name: 'sap/ui/fhir/delegate/ChargeItemViewTableDelegate', payload: {collectionName: 'ChargeItemView'}}"
+								showRowCount="true" threshold="50" width="100%">
+
+								<mdc:columns>
+									<mdc:table.Column id="idColumn"
+										header="ChargeItem Id" dataProperty="id" width="15rem">
+										<mdc:Field id="billingCaseIdField"
+											delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+											value="{id}" editMode="Display" multipleLines="true">
+										</mdc:Field>
+									</mdc:table.Column>
+									<mdc:table.Column id="startColumn"
+										header="Start" dataProperty="start">
+										<mdc:Field id="startField"
+											delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
+											value="{path: 'start', type: 'sap.ui.fhir.type.FHIRDate'}" multipleLines="true" editMode="Display" />
+									</mdc:table.Column>
+									<mdc:table.Column id="endColumn" header="End"
+										dataProperty="end" width="15rem">
+										<mdc:Field id="endField"
+											delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
+											value="{path: 'end'}" dataType="sap.ui.fhir.type.FHIRDate" editMode="Display" multipleLines="true">
+										</mdc:Field>
+									</mdc:table.Column>
+									<mdc:table.Column id="codeColumn"
+										header="Code" dataProperty="code" width="15rem">
+										<mdc:Field id="codeField"
+											delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+											value="{code}" editMode="Display" multipleLines="true">
+										</mdc:Field>
+									</mdc:table.Column>
+									<mdc:table.Column id="diplayColumn"
+										header="Description" dataProperty="display">
+										<mdc:Field
+											delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+											value="{display}" multipleLines="true" editMode="Display" />
+									</mdc:table.Column>
+									<mdc:table.Column id="priceColumn"
+										header="Price" dataProperty="price">
+										<mdc:Field
+											delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+											value="{price}" multipleLines="true" editMode="Display" />
+									</mdc:table.Column>
+									<mdc:table.Column id="currencyColumn"
+										header="Currency" dataProperty="currency">
+										<mdc:Field
+											delegate="{name: 'sap/ui/mdc/field/FieldBaseDelegate', payload: {}}"
+											value="{currency}" multipleLines="true" editMode="Display" />
+									</mdc:table.Column>
+									<mdc:table.Column id="editColumn" header="">
+										<Button icon="sap-icon://edit" type="Transparent"
+											press="onRowEditPress" ariaLabelledBy="editButtonLabel" />
+									</mdc:table.Column>
+								</mdc:columns>
+								<mdc:type>
+									<mdc:table.ResponsiveTableType
+										growingMode="Scroll" />
+								</mdc:type>
+							</mdc:Table>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</mvc:View>

@@ -5,10 +5,18 @@
 	"author": "SAP SE",
 	"license": "SAP SAMPLE CODE LICENSE AGREEMENT",
 	"devDependencies": {
-		"@ui5/cli": "^2.10.0"
+		"@ui5/cli": "^2.11.3"
 	},
 	"scripts": {
 		"serve": "ui5 serve",
 		"start": "ui5 serve -o index.html"
+	},
+	"dependencies": {
+		"@sap/sap-pacc-ui5-poc": "1.0.0-20210728162555"
+	},
+	"ui5": {
+		"dependencies": [
+			"@sap/sap-pacc-ui5-poc"
+		]
 	}
 }

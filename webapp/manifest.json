@@ -96,9 +96,13 @@
 				},
 				"sap.ui.mdc": {
 					"lazy": true
-				}
+				},
+				"sap.pacc": {}
 			}
 		},
+		"resourceRoots": {
+      		"sap.pacc": "../resources/sap/pacc/"
+    	},
 		"autoPrefixId": true,
 		"models": {
 			"": {

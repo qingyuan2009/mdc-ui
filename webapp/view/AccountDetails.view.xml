@@ -20,6 +20,10 @@
 					<ToggleButton text="back" type="Emphasized"
 						press="onBackButtonPress" />
 				</uxap:actions>
+				<uxap:actions>
+                    <Button  text="Test" type="Emphasized"
+						press="onTestButtonPress"/>
+                </uxap:actions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
 

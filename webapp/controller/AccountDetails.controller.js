@@ -5,9 +5,10 @@ sap.ui.define([ "sap/ui/core/mvc/Controller", "sap/ui/core/UIComponent",
 		"sap/fhir/model/r4/FHIRFilterType",
 		"sap/fhir/model/r4/FHIRFilterOperator",
 		"sap/ui/core/Fragment", 
-		"sap/ui/unified/CalendarAppointment"], function(Controller,
+		"sap/ui/unified/CalendarAppointment",
+		"sap/pacc/ui5/poc/FHIRCustomDateUtils"], function(Controller,
 		UIComponent, JSONModel, Dialog, Button, ButtonType, Text, MessageToast,
-		HttpHandler, FHIRFilter, FHIRFilterType, FHIRFilterOperator, Fragment, CalendarAppointment) {
+		HttpHandler, FHIRFilter, FHIRFilterType, FHIRFilterOperator, Fragment, CalendarAppointment, FHIRCustomDateUtils) {
 
 	"use strict";
 
@@ -61,6 +62,11 @@ sap.ui.define([ "sap/ui/core/mvc/Controller", "sap/ui/core/UIComponent",
 		
 		onBackButtonPress : function(oEvent) {
 			UIComponent.getRouterFor(this).navTo("accounts");
+		},
+		
+		onTestButtonPress: function(oEvent) {
+			var sDate = "2021-03-02";
+	        sap.m.MessageBox.show(FHIRCustomDateUtils.formatDate(sDate));
 		},
 		
 		_provideDetails : function(oEvent) {

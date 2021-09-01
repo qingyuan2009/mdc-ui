@@ -17,42 +17,45 @@ Billing UI with MDC control
 * Add it as dependency in package.json
 
 // change ui5/cli, otherwise npm install will fail
-"devDependencies": {
+
+	"devDependencies": {
 		"@ui5/cli": "^2.11.3"
 	},
 
-"dependencies": {
-	"@sap/sap-pacc-ui5-poc":"1.0.0-20210728162555"
-},  		
-"ui5": {
-	"dependencies": [
-		"@sap/sap-pacc-ui5-poc"
-    ]
-}
+	"dependencies": {
+		"@sap/sap-pacc-ui5-poc":"1.0.0-20210728162555"
+	},  		
+
+	"ui5": {
+		"dependencies": [
+			"@sap/sap-pacc-ui5-poc"
+    	]
+	}
 
 * Add the resource roots in manifest.json under `sap.ui5` section
 
-"dependencies": {
-	"libs": {
-         ...
-        "sap.pacc": {}
-    }
-},
-"resourceRoots": {
-	...
-    "sap.pacc": "../resources/sap/pacc/"
-},
+	"dependencies": {
+		"libs": {
+        	...
+        	"sap.pacc": {}
+    	}
+	},
+	
+	"resourceRoots": {
+		...
+    	"sap.pacc": "../resources/sap/pacc/"
+	},
 
 * Initialise and Consume the method
 
-sap.ui.define([
-    ...
-    "sap/pacc/ui5/poc/FHIRCustomDateUtils"
-    ], function (FHIRCustomDateUtils) {
-        someFn : function(){
-            var sDate = "2021-03-02"
-            sap.m.MessageBox.show(FHIRCustomDateUtils.formatDate(sDate));
-        }
-    }
-
+	sap.ui.define([
+    	...
+    	"sap/pacc/ui5/poc/FHIRCustomDateUtils"
+    	], function (FHIRCustomDateUtils) {
+        	someFn : function(){
+            	var sDate = "2021-03-02"
+            	sap.m.MessageBox.show(FHIRCustomDateUtils.formatDate(sDate));
+        	}
+    	}
+		...
 

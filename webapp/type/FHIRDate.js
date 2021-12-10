@@ -91,6 +91,18 @@ sap.ui.define([
 		return this.oModelFormatter;
 	}
 	
+	FHIRDate.prototype.getModelFormatter2 = function() {
+		if (!this.oModelFormatter2) {
+			this.oModelFormatter2 = DateFormat.getDateInstance({
+				calendarType : CalendarType.Gregorian,
+				pattern : "yyyy-MM-dd'T'HH:mm:ss.sss'Z'",
+				strictParsing : true,
+				UTC : false,
+			});
+		}
+		return this.oModelFormatter2;
+	}
+	
 	// transforms from model to external representation
 	// transforms the vValue in to targetType
 	// Dateformat.format: Date -> string
@@ -106,11 +118,24 @@ sap.ui.define([
 			case "any":
 				return vValue;
 			case "string":
-				// transform model string (is always a string!) to Date
-				const oDate = this.getModelFormatter().parse(vValue);
-				// transform the result date to the external representation -> local time zone, no UTC!
-				const oResult = this.getFormatter(this).format(oDate);
-				return oResult;
+				var dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})$/);
+				if (dateStr !== null ) {
+					// transform model string (is always a string!) to Date
+					const oDate = this.getModelFormatter().parse(vValue);	
+					// transform the result date to the external representation -> local time zone, no UTC!
+					const oResult = this.getFormatter(this).format(oDate);
+					return oResult;
+				}
+				
+				dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})T(\d{1,2}):(\d{1,2}):(\d{1,2}).(\d{1,3})Z$/);
+				if (dateStr !== null ) {
+					// transform model string (is always a string!) to Date
+					const oDate = this.getModelFormatter2().parse(vValue);	
+					// transform the result date to the external representation -> local time zone, no UTC!
+					const oResult = this.getFormatter(this).format(oDate);
+					return oResult;
+				}				
+				
 			default:
 				throw new FormatException("Don't know how to format " + this.getName() + " to "
 					+ sTargetType);

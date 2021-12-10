@@ -174,7 +174,7 @@ which is not the case for the patient name: name/0/text
 				<mdc:Table id="accountsTable" header="Open Cases"
 					filter="accountsFilterBar" p13nMode="{=['Sort','Column']}"
 					delegate="{name: 'sap/ui/fhir/delegate/ExceptionAccountTableDelegate', payload: {collectionName: 'ExceptionAccount'}}"
-					showRowCount="true" rowPress="onRowPress" threshold="4"
+					showRowCount="true" rowPress="onRowPress" threshold="4" columnPress="onColumnPress"
 					width="100%" rowAction="{=['Navigation']}">
 					<mdc:columns>
 						<mdc:table.Column id="accountIdColumn"

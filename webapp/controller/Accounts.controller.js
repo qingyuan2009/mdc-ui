@@ -16,6 +16,14 @@ sap.ui.define([
 			UIComponent.getRouterFor(this).getRoute("accounts").attachPatternMatched(this._onRouteMatched, this);
 			const fd = new FHIRDate();
 			const i = 0;
+			
+			const oTable = this.getView();
+			oTable.addEventDelegate({
+			       onAfterRendering: function() {
+			    	   sap.m.MessageBox.show("get layout");
+			        }			      
+			   }, oTable);
+			
 		},
 
 		onRowPress: function (oEvent) {
@@ -31,7 +39,13 @@ sap.ui.define([
 			if (rowBinding) {
 				rowBinding.refresh();
 			}
+		},
+		
+		onColumnPress: function (oEvent) {
+			sap.m.MessageBox.show("get layout");
+		
 		}
+		
 		
 	});
 });

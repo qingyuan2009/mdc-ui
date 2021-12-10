@@ -90,14 +90,14 @@
 										<mdc:Field id="startField"
 											delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
 											value="{path: 'start', type: 'sap.ui.fhir.type.FHIRDate'}" multipleLines="true" editMode="Display" />
-									</mdc:table.Column>
+									</mdc:table.Column>									
 									<mdc:table.Column id="endColumn" header="End"
 										dataProperty="end" width="15rem">
 										<mdc:Field id="endField"
 											delegate="{name: 'sap/ui/fhir/delegate/FHIRFieldBaseDelegate', payload: {}}"
-											value="{path: 'end'}" dataType="sap.ui.fhir.type.FHIRDate" editMode="Display" multipleLines="true">
+											value="{path: 'end', type: 'sap.ui.fhir.type.FHIRDate'}"  editMode="Display" multipleLines="true">
 										</mdc:Field>
-									</mdc:table.Column>
+									</mdc:table.Column> 
 									<mdc:table.Column id="codeColumn"
 										header="Code" dataProperty="code" width="15rem">
 										<mdc:Field id="codeField"

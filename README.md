@@ -1,3 +1,20 @@
+# MDC documentation
+
+Documentation: 
+
+•	SDK: https://sapui5untested.int.sap.eu2.hana.ondemand.com/sapui5-sdk-internal/#/api/sap.ui.mdc.condition.Condition 
+•	Source Code: https://github.com/SAP/openui5/tree/master/src/sap.ui.mdc/src/sap/ui/mdc 
+•	Sample Apps:
+•	JSON: http://veui5infra.dhcp.wdf.sap.corp:8080/uilib-sample/test-resources/sap/ui/mdc/internal/BooksJSON/index.html 
+•	ODATA V4: http://veui5infra.dhcp.wdf.sap.corp:8080/uilib-sample/test-resources/sap/ui/mdc/internal/TableWithFilterBar/index.html 
+•	FHIR PoC: https://github.wdf.sap.corp/D028776/billing-ui  + FHIR service in https://github.wdf.sap.corp/D028776/fhir-service 
+
+Challenges/Open Topics:
+
+•	Table grouping
+•	Connecting portal/flexibility service to store/recover variants  PoC required
+
+
 # billing-ui
 Billing UI with MDC control
 

@@ -114,41 +114,46 @@ sap.ui.define([
 		if (vValue === undefined || vValue === null) {
 			return null;
 		}
+		
+		
+		
 		switch (this.getPrimitiveType(sTargetType)) {
+		
 			case "any":
 				return vValue;
 			case "string":
-				var dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})$/);
+				// check if data maps with YYYY-MM-DD
+				var dateStr = null;
+				dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})$/);
 				if (dateStr !== null ) {
-					// transform model string (is always a string!) to Date
 					const oDate = this.getModelFormatter().parse(vValue);	
 					// transform the result date to the external representation -> local time zone, no UTC!
 					const oResult = this.getFormatter(this).format(oDate);
 					return oResult;
 				}
 				
+				// check if data maps with YYYY-MM-DDThh:mm:ss.sssZ
 				dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})T(\d{1,2}):(\d{1,2}):(\d{1,2}).(\d{1,3})Z$/);
 				if (dateStr !== null ) {
-					// transform model string (is always a string!) to Date
 					const oDate = this.getModelFormatter2().parse(vValue);	
 					// transform the result date to the external representation -> local time zone, no UTC!
 					const oResult = this.getFormatter(this).format(oDate);
 					return oResult;
-				}				
+				}
+				
+				if 	(dateStr == null){
+					throw new FormatException("Don't know how to format " + this.getName() + " to "
+							+ sTargetType);
+				}		
 				
 			default:
 				throw new FormatException("Don't know how to format " + this.getName() + " to "
 					+ sTargetType);
 		}
-/* the following does not work because it implicitly assumes that the model format understands also the output format		
-		oFormat = this.getModelFormat();
-		oValue = oFormat.parse(oValue);
-*/		
 		
 	};
 	
 	// transforms the external format to the model format = string
-
 	FHIRDate.prototype.parseValue = function(vValue, sSourceType) {
 		if (vValue === "" || vValue === null) {
 			return null;

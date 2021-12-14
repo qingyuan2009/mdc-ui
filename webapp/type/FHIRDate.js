@@ -122,29 +122,27 @@ sap.ui.define([
 			case "any":
 				return vValue;
 			case "string":
-				// check if data maps with YYYY-MM-DD
-				var dateStr = null;
-				dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})$/);
-				if (dateStr !== null ) {
+				var dateStr = null;		
+				var oResult = null;	
+				var  objRegExp= /^(\d{4})(-)(\d{1,2})(-)(\d{1,2})/;
+				if (objRegExp.test(vValue)){					
 					const oDate = this.getModelFormatter().parse(vValue);	
 					// transform the result date to the external representation -> local time zone, no UTC!
-					const oResult = this.getFormatter(this).format(oDate);
-					return oResult;
-				}
-				
+					oResult = this.getFormatter(this).format(oDate);
+				}								
 				// check if data maps with YYYY-MM-DDThh:mm:ss.sssZ
-				dateStr = vValue.match(/^(\d{4})(-)(\d{1,2})\2(\d{1,2})T(\d{1,2}):(\d{1,2}):(\d{1,2}).(\d{1,3})Z$/);
-				if (dateStr !== null ) {
+				var objRegExp2 = /^(\d{4})(-)(\d{1,2})(-)(\d{1,2})T(\d{1,2}):(\d{1,2}):(\d{1,2}).(\d{1,3})Z/;
+				if (objRegExp2.test(vValue)) {
 					const oDate = this.getModelFormatter2().parse(vValue);	
 					// transform the result date to the external representation -> local time zone, no UTC!
-					const oResult = this.getFormatter(this).format(oDate);
+					oResult = this.getFormatter(this).format(oDate);
+				}	
+				if (oResult === null || oResult === undefined){
+					throw new FormatException("Don't know how to format " + this.getName() + " to "
+					+ sTargetType);
+				}else{
 					return oResult;
 				}
-				
-				if 	(dateStr == null){
-					throw new FormatException("Don't know how to format " + this.getName() + " to "
-							+ sTargetType);
-				}		
 				
 			default:
 				throw new FormatException("Don't know how to format " + this.getName() + " to "

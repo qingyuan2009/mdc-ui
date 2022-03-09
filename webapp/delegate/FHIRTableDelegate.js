@@ -43,18 +43,25 @@ sap.ui.define([ "sap/ui/mdc/TableDelegate", "sap/ui/mdc/table/Column",
 		return FHIRTypeUtil;
 	}
 	
-	FHIRTableDelegate.updateBindingInfo = function(oMDCTable, oMetadataInfo, oBindingInfo) {
+	FHIRTableDelegate.updateBindingInfo = function(oMDCTable, oBindingInfo) {
 		if (!oMDCTable) {
 			return;
 		}
-		if (oMetadataInfo && oBindingInfo) {
-			oBindingInfo.path = oBindingInfo.path || oMetadataInfo.collectionPath || "/" + oMetadataInfo.collectionName;
-			oBindingInfo.model = oBindingInfo.model || oMetadataInfo.model;
-		}
 
-		if (!oBindingInfo) {
-			oBindingInfo = {};
-		}
+		oMDCTable._oTable.mProperties.growingScrollToLoad = true;
+        if (oBindingInfo) {
+            oBindingInfo.path = oBindingInfo.path || oMDCTable.getPayload().collectionPath || "/" + oMDCTable.getPayload().collectionName;
+        }
+
+		// MDC updated, so comment the following lines and add line 51-54
+		//if (oMetadataInfo && oBindingInfo) {
+		//	oBindingInfo.path = oBindingInfo.path || oMetadataInfo.collectionPath || "/" + oMetadataInfo.collectionName;
+		//	oBindingInfo.model = oBindingInfo.model || oMetadataInfo.model;
+		//}
+
+		//if (!oBindingInfo) {
+		//	oBindingInfo = {};
+		//}
 		
 		let oFilter = Core.byId(oMDCTable.getFilter()),
 			bFilterEnabled = oMDCTable.isFilteringEnabled(),
